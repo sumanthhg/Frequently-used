@@ -1,0 +1,93 @@
+INSERT INTO PUBLIC .student (
+	email,
+	gender,
+	is_verified,
+	istar_authorization_token,
+	mobile,
+	NAME,
+	PASSWORD,
+	token_expired,
+	token_verified,
+	user_type,
+	father_name,
+	mother_name,
+	address_id,
+	organization_id,
+	phone,
+	image_url
+)
+VALUES
+	(
+		'email@istarindia.com',
+		'MALE',
+		't',
+		'435',
+		'88888888',
+		'Name',
+		'test123',
+		NULL,
+		NULL,
+		'STUDENT',
+		'dad',
+		'mom',
+		'89',
+		'2',
+		'8888888888',
+		NULL
+	);
+---------------------------------------------------------------
+
+INSERT INTO PUBLIC .batch_students (
+	batch_group_id,
+	student_id, 
+	user_type
+ )
+ VALUES 	
+
+(
+98,
+ 433,
+ 'STUDENT'
+);
+
+----------------------------------------
+
+SELECT * from batch_schedule_event where actor_id  in (151, 374) AND cast (eventdate as varchar (50)) LIKE '%2016-07-28%'
+
+----------------------------------
+
+select * from lesson where session_id =90 order by order_id, id 
+------------------------------------
+
+select * from slide, presentaion
+where slide.presentation_id = presentaion.id
+and presentaion.lesson_id = 535 order by slide.order_id 
+
+-------------------------------------------------
+
+UPDATE public.student SET "organization_id"='2' WHERE ("id"='50')
+
+----------------------------------------------------------
+---Mapping trainner and presenter in trainer_presentor table
+
+INSERT INTO PUBLIC .trainer_presentor (
+	trainer_id,
+	presentor_id
+)
+VALUES
+	( '385', '386') RETURNING id,
+	trainer_id,
+	presentor_id
+	
+	
+	---------------------------------------------------
+	
+	CREATE SEQUENCE doubt_id_seq;
+ALTER TABLE doubt
+ALTER COLUMN id SET DEFAULT NEXTVAL('doubt_id_seq');
+
+----------------And---------------------
+
+ALTER SEQUENCE serial RESTART WITH 105;
+
+-----------------------------------------

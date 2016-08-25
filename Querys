@@ -91,3 +91,20 @@ ALTER COLUMN id SET DEFAULT NEXTVAL('doubt_id_seq');
 ALTER SEQUENCE serial RESTART WITH 105;
 
 -----------------------------------------
+
+SELECT
+	A .user_id,
+   s. NAME,
+	A .status
+FROM
+	attendance A,
+	student s
+WHERE
+	A.event_id = '764421d4-9ae3-4738-9fc6-f9467c9328aa'
+AND A .user_id = s. ID
+
+
+-----------------------------------------------------------------------------
+
+
+

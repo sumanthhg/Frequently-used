@@ -1,0 +1,26 @@
+------ CMD to deploy SERVER using putty and Winsep
+
+ls
+ps -ef | grep java
+kill -9 8529
+ps -ef | grep java
+history
+ps -ef | grep java
+cd apache-tomcat-8.5.4/webapps/
+ls
+rm -rf admin_portal admin_portal.war
+ls
+rm -rf admin_portal.war
+ls
+cd ..
+ls
+cd bin
+ls
+./catalina.sh run
+./startup.sh
+history
+
+--LOGS
+
+tail -f Catalina.out
+/apache-tomcat-8.0.36/logs# tail -f catalina.out

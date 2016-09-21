@@ -1,0 +1,129 @@
+package in.orgadmin.controller;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.poi.hssf.usermodel.HSSFCell;
+import org.apache.poi.hssf.usermodel.HSSFSheet;
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.json.JSONArray;
+
+import com.istarindia.apps.dao.Pincode;
+import com.istarindia.apps.services.PincodeService;
+import com.istarindia.apps.services.StudentService;
+import com.istarindia.bulkupload.utils.BulkStudentUploadUtils;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class UserBulkUpload
+ */
+@WebServlet("/UserBulkUpload")
+public class UserBulkUpload extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	
+
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public UserBulkUpload() {
+        super();
+       
+    }
+
+	
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    	
+    	
+    	ArrayList<ArrayList<String>>  temp =	readExcelData("C:/Users/Sumanth/Videos/new1st year 1sem MBA G1 A.xls");
+		for(ArrayList<String> kk :temp){
+			System.out.println(kk.get(0));
+			System.out.println(kk.get(1));
+			System.out.println(kk.get(2));
+		   System.out.println(kk.get(3));
+		}
+}
+	public static ArrayList<ArrayList<String>> readExcelData(String fileName) {
+		ArrayList<ArrayList<String>> celllisting = new ArrayList<>();
+		try {
+    	
+    	FileInputStream file = new FileInputStream(new File(fileName));
+		// Create Workbook instance holding reference to .xlsx file
+		//XSSFWorkbook workbook = new XSSFWorkbook(file);
+		// Get first/desired sheet from the workbook
+			
+			// Create Workbook instance holding reference to .xls file
+		//XSSFSheet sheet = workbook.getSheetAt(0);
+		
+		HSSFWorkbook workbook = new HSSFWorkbook(file);
+		HSSFSheet sheet = workbook.getSheetAt(0);
+		
+		// Iterate through each rows one by one
+		Iterator<Row> rowIterator = sheet.iterator();
+		while (rowIterator.hasNext()) {
+			Row row = rowIterator.next();
+			// For each row, iterate through all the columns
+			Iterator<Cell> cellIterator = row.cellIterator();
+			if (row.getRowNum() != 0) {
+				ArrayList<String> temp = new ArrayList<>();
+
+				while (cellIterator.hasNext()) {
+					HSSFCell cell = (HSSFCell) cellIterator.next();
+					switch (cell.getCellType()) {
+					case HSSFCell.CELL_TYPE_NUMERIC:
+						temp.add(cell.getNumericCellValue() + "");
+						break;
+					case HSSFCell.CELL_TYPE_STRING:
+						temp.add(cell.getStringCellValue());
+						break;
+						
+					case HSSFCell.CELL_TYPE_BLANK:
+						temp.add("CELL_TYPE_BLANK");
+
+						break;
+
+					}
+				}
+				celllisting.add(temp);
+
+			}
+		}
+
+		file.close();
+	} catch (Exception e) {
+		e.printStackTrace();
+	}
+
+	return celllisting;
+}
+		
+	
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+
+
+}

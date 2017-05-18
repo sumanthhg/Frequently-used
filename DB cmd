@@ -21,3 +21,10 @@ localhost -- local db or server db
  Change PostgreSQL user password
 
 ALTER USER "user_name" WITH PASSWORD 'new_password';
+
+Kill all connection to db
+
+SELECT pg_terminate_backend(pg_stat_activity.pid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'postgres'
+  AND pid <> pg_backend_pid();

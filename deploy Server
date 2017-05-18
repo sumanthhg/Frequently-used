@@ -27,3 +27,11 @@ history
 
 tail -f Catalina.out
 /apache-tomcat-8.0.36/logs# tail -f catalina.out
+
+
+to tar a file
+tar -czvf name-of-archive.tar.gz /path/to/directory-or-file
+
+to unzip
+
+tar -xzvf archive.tar.gz

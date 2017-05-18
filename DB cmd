@@ -1,0 +1,23 @@
+pg_restore cmd
+
+pg_restore -h localhost -p 5432 -U postgres -d old_db -v "/usr/local/backup/10.70.0.61.backup"  
+
+old_db -- db name which u want to restore data
+
+localhost -- local db or server db 
+
+/usr/local/backup/10.70.0.61.backup -- path where the db is stored
+
+pg_dump cmd
+
+pg_dump -h localhost -p 5432 -U postgres -F c -b -v -f "/usr/local/backup/10.70.0.61.backup" old_db
+
+old_db -- db name which u want to take data
+
+localhost -- local db or server db 
+
+/usr/local/backup/10.70.0.61.backup -- path where the db is stored
+
+ Change PostgreSQL user password
+
+ALTER USER "user_name" WITH PASSWORD 'new_password';

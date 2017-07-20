@@ -28,3 +28,11 @@ SELECT pg_terminate_backend(pg_stat_activity.pid)
 FROM pg_stat_activity
 WHERE pg_stat_activity.datname = 'postgres'
   AND pid <> pg_backend_pid();
+  
+  pg_dump cmd sql
+  
+   pg_dump -U postgres postgres -f /tmp/15septbackup.sql
+
+pg_restore cmd for sql
+
+psql -U postgres -d postgres -a -f C:\\Users\\Vaibhav\\Documents\\abc\\abc.sql

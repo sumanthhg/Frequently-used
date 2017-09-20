@@ -1,0 +1,30 @@
+//-- jsp img tag
+<img alt="NO PRESENTATION" src="/ScreenShot?current_slide_id=123 %>&lesson_id=1233 %>" style="width: 99%;height: 50vh">
+
+//---controller
+ response.setContentType("image/png");
+		 
+		 int current_slide_id =Integer.parseInt( request.getParameter("current_slide_id"));
+		 int lesson_id =Integer.parseInt( request.getParameter("lesson_id"));
+		 UUID uuid = UUID.randomUUID();
+		    URLServices services = new URLServices();
+			String phantom_path = services.getAnyProp("phantom_path");
+		   
+		    Process process = Runtime.getRuntime().exec(phantom_path+"bin/phantomjs "+phantom_path+"/examples/rasterize.js \"http://elt.talentify.in/tfy_socket/live_session_logs.jsp?current_slide_id="+current_slide_id+"&lesson_id="+lesson_id+"\" /tmp/"+uuid+".png");
+	        try {
+				process.waitFor();
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		    
+	         File imageFile = new File("/tmp/"+uuid+".png");
+	         System.err.println(imageFile.getAbsolutePath());
+		    try {
+		        BufferedImage bufferedImg = ImageIO.read(imageFile);
+		        ServletOutputStream out = response.getOutputStream();
+		        ImageIO.write(bufferedImg, "png", out);
+		        out.close();
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }

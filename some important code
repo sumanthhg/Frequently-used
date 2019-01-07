@@ -1,0 +1,24 @@
+const index = window.customTags.findIndex(item => item.tagName === key);
+	var data = window.customTags[index];
+ ------ ---- ----
+  
+  var chunk_size = 2;
+				var actionsList = tempData.map(function (e, i) {
+					return i % chunk_size === 0 ? tempData.slice(i, i + chunk_size) : null;
+				}).filter(function (e) {
+					return e;
+				});
+ ---- ---- --- --- 
+ 
+ Collections.sort(journeyInfo.journeyDetails.actions, new Comparator<JourneyInfo.TAction>() {
+				public int compare(JourneyInfo.TAction o1, JourneyInfo.TAction o2) {
+					if (o1.position == null) {
+						return (o2.position == null) ? 0 : 1;
+					}
+					if (o2.position == null) {
+						return -1;
+					}
+					return o1.position.compareTo(o2.position);
+				}
+			});
+ 

@@ -22,3 +22,5 @@ const index = window.customTags.findIndex(item => item.tagName === key);
 				}
 			});
  
+---------------------------------------------------
+array.filter((value, index, self) => self.map(x => x.age).indexOf(value.age) == index)  >>> javascript return  unique array of objects ES6 (edited) 
